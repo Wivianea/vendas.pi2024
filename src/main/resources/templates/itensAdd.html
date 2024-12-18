@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+	rel="stylesheet">
+<title>Adição de itens</title>
+<style type="text/css">
+body {
+	background-color: rgb(192, 192, 192);
+	background-size: cover;
+	background-repeat: no-repeat;
+	color: rgb(0, 0, 0);
+	font-family: "Helvetica", Arial, sans-serif;
+}
+
+nav#logo {
+	font-family: "Helvetica", Arial, sans-serif;
+}
+
+a#nomeL {
+	margin-left: 35px;
+}
+
+li#menu {
+	margin-right: 35px;
+	font-size: 100pt;
+}
+
+div#itensC {
+	border-radius: 10px;
+}
+
+div#botoes {
+	margin-top: 10px;
+}
+</style>
+</head>
+<body>
+
+<div th:replace="~{menu :: menu}"></div>
+	<div class="container">
+			<div class="col s12">
+				<div class="card">
+					<div class="card-content">
+						<span class="card-title">Adicionar Item:</span>
+
+						<form action="/vendasperfumes/addItem" method="post"
+							th:object="${item}">
+							<div>
+								<input type="hidden" th:field="*{id}" readonly="readonly">
+							</div>
+							<div>
+								<label>Nome: </label>
+								<p class="red-text text-darken-2" th:errors="*{nome}"></p>
+								<input type="text" th:field="*{nome}">
+							</div>
+							<div>
+								<label>Descrição: </label>
+								<p class="red-text text-darken-2" th:errors="*{descricao}"></p>
+								<textarea rows="100" cols="100" th:field="*{descricao}"></textarea>
+
+							</div>
+							<div>
+								<label>Preço: </label>
+								<p class="red-text text-darken-2" th:errors="*{preco}"></p>
+								<input type="number" th:field="*{preco}">
+							</div>
+							<div>
+								<label>Tipo: </label>
+								<p class="red-text text-darken-2" th:errors="*{tipo}"></p>
+								<p>
+									<label> <input class="with-gap" name="tipoItem"
+										type="radio" th:field="*{tipo}" value="Perfume" /> <span>Quasar</span>
+									</label>
+								</p>
+								<p>
+									<label> <input class="with-gap" name="tipoItem"
+										type="radio" th:field="*{tipo}" value="Perfume" /> <span>Biografia</span>
+									</label>
+								</p>
+								<p>
+									<label> <input class="with-gap" name="tipoItem"
+										type="radio" th:field="*{tipo}" value="Perfume" /> <span>Arbo</span>
+									</label>
+								</p>
+								<p>
+									<label> <input class="with-gap" name="tipoItem"
+										type="radio" th:field="*{tipo}" value="Perfumaria" /> <span>Malbec</span>
+									</label>
+								</p>
+							</div>
+							<div id="botoes">
+								<button type="submit" class="btn">Salvar</button>
+								<button type="reset" class="btn">Limpar</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="container" style="display: flex; justify-content: center; height: 400px;">
+		<div class="row">
+			<div class="col 8">
+				<div class="card" id=itensC>
+					<div class="card-content">
+						<span class="card-title">Itens Cadastrados:</span>
+						<p th:if="${mensagem}" th:text="${mensagem}"></p>
+						<table class="highlight">
+							<thead>
+								<tr>
+									<th>Id</th>
+									<th>Nome</th>
+									<th>Preço</th>
+									<th>Tipo</th>
+									<th>Catálogo</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="i : ${itens}">
+									<td th:text="${i.id}">1</td>
+									<td th:text="${i.nome}">Quasar</td>
+									<td>R$ <span th:text="${i.preco}">75</span></td>
+									<td th:text="${i.tipo}">Perfume</td>
+									<td th:text="${i.status}">Disponivel 3</td>
+									<td>
+										<a th:href="@{/vendasperfumes/add/{id}/editarCatálogo(id=${i.id})}"><i class="material-icons">view_list</i></a>
+										<a sec:authorize="hasRole('ADICIONARITEM')" th:href="@{/vendasperfumes/add/{idI}/editar(idI=${i.id})}"><i class="material-icons">edit</i></a> 
+										<a sec:authorize="hasRole('ADICIONARITEM')" th:href="@{/vendasperfumes/add/{id}/deletar(id=${i.id})}"><i class="material-icons">delete_forever</i></a>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+		</div>
+</body>
+</html>

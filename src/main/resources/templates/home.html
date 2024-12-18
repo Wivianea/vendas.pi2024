@@ -1,11 +1,55 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Perfumaria</title>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+<style type="text/css">
+
+body {
+	
+	
+
+	background-color: rgb(192, 192, 192);
+	background-size: cover;
+	background-repeat: no-repeat;
+	color: rgb(255, 255, 255);
+	font-family: "Helvetica", Arial, sans-serif;
+}
+nav#logo {
+	font-family: "Helvetica", Arial, sans-serif;
+}
+
+a#nomeL {
+	margin-left: 35px;
+}
+
+li#menu {
+	margin-right: 35px;
+	font-size: 100pt;
+}
+</style>
+<title>Home</title>
 </head>
 <body>
-<h1>bem vindo a nossa aplicação</h1>
-<h2>deu certo</h2>
+	
+	<nav th:fragment="vendasperfumes" name="Logo" id="logo">
+    <div class="nav-wrapper">
+      <a href="/vendasperfumes/home" class="brand-logo">PERFUMARIA</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li sec:authorize="!isAuthenticated()"><a href="/">Login</a></li>
+        <li  sec:authorize="hasRole('ADMIN')"><a href="/cadastrar">Cadastro</a></li>
+        <li><a href="pedido.html">Pedido</a></li>
+        <li><a href="/i">Item</a></li>
+         <li><a href="/p">Papel</a></li>
+		 <li sec:authorize="isAuthenticated()"><a href="#" th:href="@{/logout}">Logout</a></li>
+      </ul>
+    </div>
+  </nav>
+	
+	
+	<h1> Seja bem vindo! </h1>
+	<br>
+	<h1> Realize seu pedido com nossa perfumaria! </h1>
 </body>
 </html>

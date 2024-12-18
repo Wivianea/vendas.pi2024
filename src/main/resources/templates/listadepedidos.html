@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lista de Pedidos</title>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+<link rel="stylesheet" href="CSS/cadastro.css">
+
+
+<style>
+body {
+	background-color: rgb(192, 192, 192);
+	background-size: cover;
+	background-repeat: no-repeat;
+	color: rgb(0, 0, 0);
+	font-family: "Helvetica", Arial, sans-serif;
+}
+
+nav#logo {
+	font-family: "Helvetica", Arial, sans-serif;
+}
+
+a#nomeL {
+	margin-left: 35px;
+}
+
+li#login {
+	margin-right: 35px;
+	font-size: 100pt;
+}
+
+h1#titulo {
+	text-align: center;
+}
+
+div#pedidos {
+	border-radius: 10px;
+}
+</style>
+
+</head>
+
+
+<title>PERFUMARIA</title>
+</head>
+<body>
+	
+	<nav>
+    <div class="nav-wrapper">
+      <a href="#" class="brand-logo">Perfumaria</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href="sass.html">Login</a></li>
+        <li><a href="collapsible.html">Cadastro</a></li>
+        <li><a href="badges.html">Pedido</a></li>
+        <li><a href="collapsible.html">Item</a></li>
+         <li><a href="collapsible.html">Papel</a></li>
+          <li><a href="collapsible.html">sair</a></li>
+      </ul>
+    </div>
+  </nav>
+	
+	<div th:replace="~{menu :: menu}"></div>
+	<h1 id="titulo">Lista de Pedidos</h1>
+	<div class="container">
+		<div class="row">
+			<div class="col s12">
+				<div class="card" id="pedidos">
+					<div class="card-content">
+						<span class="card-title"></span>
+						<table class="highlight">
+
+							<thead>
+								<tr>
+									<th>Id</th>
+									<th>Nome</th>
+									<th>Itens</th>
+									<th>Data</th>
+									<th>Horário</th>
+									<th>Valor</th>
+									<th>Endereço</th>
+								</tr>
+							</thead>
+
+							<tbody>
+								<tr th:each="p : ${pedidos}">
+
+									<td th:text="${p.id}">1</td>
+									<td th:text="${p.cliente.nome}">ilia</td>
+									<td>
+										<ul th:each="i : ${p.itens}">
+											<li th:text="${i.nome}">1</li>
+										</ul>
+									</td>
+									<td th:text="${#temporals.format(p.data, 'dd/MM/yyyy')}">25/02/2021</td>
+									<td th:text="${p.horario}">14:10</td>
+									<td>R$ <span th:text="${p.valortotal}">55,00</span></td>
+									<td th:text="${p.endereco}">Centro 15</td>
+								</tr>
+
+							</tbody>
+						</table>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
