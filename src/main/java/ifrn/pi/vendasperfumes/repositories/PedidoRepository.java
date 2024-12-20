@@ -4,7 +4,6 @@ package ifrn.pi.vendasperfumes.repositories;
 
 	import ifrn.pi.vendasperfumes.models.Pedido;
 
-
 	public interface PedidoRepository extends JpaRepository<Pedido, Long>{
 
 	}

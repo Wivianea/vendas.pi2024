@@ -9,7 +9,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-
 import ifrn.pi.vendasperfumes.models.Item;
 import ifrn.pi.vendasperfumes.models.Pedido;
 import ifrn.pi.vendasperfumes.repositories.ItemRepository;
@@ -28,16 +27,18 @@ public class vendasperfumesController {
 	@Autowired
 	private PedidoRepository pr;
 	
-/*	@GetMapping("/vendasperfumes/home")
-	public ModelAndView form(Home home) {
+	
+	
+	@GetMapping("/vendasperfumes/home")
+	public ModelAndView form() {
 		ModelAndView md = new ModelAndView();
 		
 		md.setViewName("/vendasperfumes/home");
 		List<Item> itens = ir.findAll();
-		md.addObject("home", home);
+		md.addObject(itens);
 		
 		return md;
-	}*/
+	}
 	
 	@GetMapping("/vendasperfumes/addItem")
 	public ModelAndView form(Item item) {
@@ -64,7 +65,7 @@ public class vendasperfumesController {
 	}
 
 
-/*	@GetMapping("/vendasperfumes/cadastro")
+	@GetMapping("/vendasperfumes/cadastro")
 	@PreAuthorize("hasRole('CLIENTE')")
 	public ModelAndView cadastro(Item cadastro) {
 		ModelAndView md = new ModelAndView();
@@ -122,7 +123,7 @@ public class vendasperfumesController {
 	}
 	
 	@Validated
-	 public ModelAndView admin(@Valid Cliente admin, BindingResult result) {
+	 public ModelAndView admin(@Valid Client admin, BindingResult result) {
           ModelAndView mv = new ModelAndView("login");
 
          String hashSenha = PasswordUtil.encoder(admin.getSenha());
@@ -133,13 +134,14 @@ public class vendasperfumesController {
 	 		return admin(admin);
 	 	}
 		
-			ad.save(admin);
+			ur.save(admin);
 	 		System.out.println("admin Salvo!");
 		
 
 	 	return mv;
-	}*/
 	
 	
+	
+}
 }
 

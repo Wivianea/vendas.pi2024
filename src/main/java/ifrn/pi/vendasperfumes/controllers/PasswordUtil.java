@@ -2,6 +2,7 @@ package ifrn.pi.vendasperfumes.controllers;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+
 public class PasswordUtil {
 
     public static String encoder(String senha){
